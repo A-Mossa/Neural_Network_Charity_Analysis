@@ -8,79 +8,34 @@ The dataset used contatined information about application type, classification, 
 ## Results
 
 ### Data Preprocessing
-![Ovrsmpl Acc](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Ovrsmpl%20Accuracy.png)
-- Balanced Accuracy Score of 64%
 
-![Ovrsmpl CM](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Ovrsmpl%20CM.png)
-- High Risk Precision of 1% and Sensitivity of 61%
-- Low Risk Precision of 100% and Sensitivity of 68%
-- F1 value of 2% for High Risk
+![PreProcessing](https://github.com/A-Mossa/Neural_Network_Charity_Analysis/blob/main/Imgs/PreprocessingDF.png)
 
-![Ovrsmpl Clr](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Ovrsmpl%20Clr.png)
+- What variable(s) are considered the target(s) for your model?
+  - "IS_SUCCESSFUL" parameter was selected as the target as it is a statement of the success or the failure of the application.
+  
+- What variable(s) are considered to be the features for your model?
+  - "APPLICATION_TYPE", "AFFILIATION", "CLASSIFICATION", "USE CASE", "ORGANIZATION, STATUS", "INCOME_AMT", "SPECIAL CONSIDERATIONS", and "ASK_AMT" were the ones selected as features, as they have the most meaningful effect on the project.
+  
+- What variable(s) are neither targets nor features, and should be removed from the input data?
+  - "EIN", and "NAME" were dropped off the model as they pose no real life effect on the success or failure of the project.
 
-### Oversampling  with SMOTE
+### Compiling, Training, and Evaluating the Model
 
-![SMOTE Smt](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/SMOTE%20acc.png)
-- Balanced Accuracy Score of 65.2%
+![Model Evaluation](https://github.com/A-Mossa/Neural_Network_Charity_Analysis/blob/main/Imgs/modelEvalDel2.png)
 
-![SMOTE CM](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/SMOTE%20CM.png)
-- High Risk Precision of 1% and Sensitivity of 67%
-- Low Risk Precision of 100% and Sensitivity of 64%
-- F1 value of 2% for High Risk
+- How many neurons, layers, and activation functions did you select for your neural network model, and why?
+  - The model consisted of 1 Input layer, 2 hidden layers, and 1 output layer.
+  - Neurons for the first hidden layer are 80 as this simulates almost double the input , and 30 for the second hidden layer which is around the same as the number of inputs.
+  - 'Relu' is the function of choice for the 2 hidden layers, on top of a sigmoid function.
 
-![SMOTE CM](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/SMOTE%20Clr.png)
+- Were you able to achieve the target model performance?
+  - No is the answer to that question. the model only slightly came short of the target 75% accuracy score intended.
 
-### Undersampling with ClusterCentroids
-
-![CC Acc](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Undrsmpl%20Acc.png)
-- Balanced Accuracy Score of 52%
-
-![CC CM](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Undrsmpl%20CM.png)
-- High Risk Precision of 1% and Sensitivity of 57%
-- Low Risk Precision of 100% and Sensitivity of 47%
-- F1 value of 1% for High Risk
-
-![CC Clr](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Undrsmpl%20Clr.png)
-
-### Combination Over and Undersampling with SMOTEENN
-
-![Comp Acc](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Comp%20Clr.png)
-- Balanced Accuracy Score of 64%
-
-![Comp CM](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Comp%20CM.png)
-- High Risk Precision of 1% and Sensitivity of 70%
-- Low Risk Precision of 100% and Sensitivity of 58%
-- F1 value of 2% for High Risk
-
-![Comp Clr](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/Comp%20Clr.png)
-
-### Ensemble learner with BalancedRandomForestClassifier
-
-![blrf Acc](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/blrf%20Acc.png)
-- Balanced Accuracy Score of 78.8%
-
-![blrf Cm](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/blrf%20CM.png)
-- High Risk Precision of 3% and Sensitivity of 70%
-- Low Risk Precision of 100% and Sensitivity of 87%
-- F1 value of 6% for High Risk which is a noticable jump from previous models
-
-![blrf Clr](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/blrf%20Clr.png)
-
-### Ensemble learner with EasyEnsembleClassifier
-
-![ee Acc](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/EE%20Acc.png)
-- Balanced Accuracy Score of 93.1% !
-
-![ee Cm](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/EE%20CM.png)
-- High Risk Precision of 9% and Sensitivity of 92%
-- Low Risk Precision of 100% and Sensitivity of 94%
-- F1 value of 16% for High Risk which is significantly higher than all other models !
-
-![ee Clr](https://github.com/A-Mossa/Credit_Risk_Analysis/blob/main/Imgs/EE%20Clr.png)
+- What steps did you take to try and increase model performance?
+  - the column "ASK_EMT" showed great variance which is not desirable for this ML project. Bucketing was considered, but dropping both this column and the "STATUS" column was the final decision. Adding more neurons to the hidden layer was the next logical step to improve the accuracy and reduce the loss in the model. following that step, an attempt to increase the number of layers were implemented which didnt increase the accuracy score. the final attempt at optimizing the model was the introduction of a different activation function, (tanh), which insignificatly impacted the results .
 
 ## Summary
 
-It is without a doubt that EasyEnsemble Classifier is the superior model for this use case because it yielded the best results out of all the six models trained.
-its accuracy was an astonishing 93.1%, with 9% accuracy for high risk applications, and the highest sensitivity of 92%. Same can be said about this model's performance in detecting low risk loan applications with stats of 94% accuracy and an overall F1 score of 16%.
-
-Jill and I would recommend moving forward using EasyEnsembleClassifier as the model of choice when dealing with Credit Risk, as it demonstrated the highest performance and yields out of all models trained, until a better model with better results is found.
+The Neural Network ML model used failed to achieve target of 75% accuracy, and came with a staggering 50% loss, even with optimization. Based on these results the performance of this model wasn't optimal.
+Since we are dealing with a classification issue, a supervised ML model such as RandomForest would have better served the purposes of this project at less resource cost.
